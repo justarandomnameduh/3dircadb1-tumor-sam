@@ -70,10 +70,14 @@ dicom_interact_with_sam(1, "liver")
 ## Key Results
 
 - **Tumor Metrics**: Extracted tumor count, size, and scale for each patient.
-- **Accurate Segmentation**: SAM-based segmentation demonstrated precise localization of tumors in 3D imaging data.
 - **Interactive Visualization**: Widgets and overlays significantly improve the interpretability of medical images.
 
 ---
+
+## Limitations
+
+- SAM relies on automated mask generation without allowing manual selection of points or fine-tuning. This can lead to inaccuracies in organ boundaries, especially in cases with complex anatomical structures or low-contrast regions.
+- SAM is a general-purpose segmentation model and is not fine-tuned for medical imaging or specific organs, which can result in suboptimal mask generation.
 
 ## References
 
