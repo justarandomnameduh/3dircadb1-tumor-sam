@@ -1,85 +1,71 @@
-# Tumor Segmentation with DICOM Processing and SAM Integration using 3Dircadb1 dataset
+# DICOM Visualization and Tumor Analysis
 
 ## Overview
-
-This repository implements a system for **tumor segmentation** from **DICOM medical images**, utilizing **Segment Anything Model (SAM)** for precise mask generation. The project facilitates end-to-end processing of 3D medical imaging data, including DICOM file handling, visualization, and segmentation techniques. Interactive widgets and visualization functionalities enhance usability for medical professionals and researchers.
+This project implements a comprehensive pipeline for visualizing and analyzing DICOM medical imaging data. It includes features for processing, visualizing, and extracting metadata from 3D medical images. Designed for multi-patient datasets, the project allows interactive exploration and analysis of organs and tumors within medical scans.
 
 ---
 
 ## Features
 
-### Data Preparation
-- **DICOM Processing**: Handles DICOM data, extracting slices and metadata for analysis.
-- **Recursive File Handling**: Unzips and organizes complex directory structures for multi-patient datasets.
-- **Windowing**: Applies Hounsfield Unit (HU) windowing to adjust image intensity ranges for various organs (e.g., liver, lungs).
+### DICOM File Handling
+- **Recursive File Management**: Automatically unzips and organizes multi-patient datasets.
+- **HU Windowing**: Adjusts image intensity ranges for specific organs using Hounsfield Unit (HU) parameters.
+- **Metadata Extraction**: Extracts patient-level metadata for in-depth analysis.
 
-### Interactive Visualization
-- **3D Medical Imaging**: Displays axial, coronal, and sagittal views with optional mask overlays.
-- **Widget Integration**: Enables user interaction for slice selection, windowing adjustments, and segmentation visualization.
+### 3D Visualization
+- **Multi-View Support**: Displays axial, coronal, and sagittal views of medical images.
+- **Interactive Widgets**: Enables slice selection, windowing adjustments, and overlay visualization.
 
-### Tumor Segmentation
-- **SAM Integration**: Leverages **Segment Anything Model (SAM)** to segment tumor regions in specific slices with RGB input processing.
-- **Automatic Mask Generation**: Dynamically generates segmentation masks for tumor identification.
-- **Organ Masking**: Utilizes organ-specific masks for enhanced localization.
-
-### Metadata Extraction
-- **Patient-Level Data**: Computes metrics such as tumor count, size, and scale relative to organ size.
-- **Statistical Reporting**: Provides detailed summaries of tumor characteristics for each patient.
+### Tumor Analysis
+- **Mask Integration**: Visualizes organ-specific and tumor-specific masks.
+- **Tumor Metrics**: Calculates tumor count, size, and scale relative to the liver for each patient.
+- **Statistical Reporting**: Outputs tumor statistics for detailed patient analysis.
 
 ---
 
 ## Workflow
 
-### 1. Data Ingestion and Processing
-- Extract and organize DICOM files from a multi-patient dataset.
-- Apply HU windowing to enhance image quality for specific organs.
-- Compute scaling factors for accurate multi-dimensional visualization.
+### 1. Data Preparation
+- Extract and organize multi-patient DICOM datasets.
+- Compute scaling factors and apply HU windowing for specific organs.
 
 ### 2. Interactive Visualization
-- Visualize and interact with 3D images using widgets for slice navigation and intensity adjustments.
-- Overlay organ-specific masks on image slices for detailed analysis.
+- Explore 3D images with overlays using interactive widgets.
+- Adjust slices and windowing parameters dynamically.
 
-### 3. Tumor Segmentation with SAM
-- Perform automatic segmentation of tumor regions using SAM.
-- Generate and display segmentation masks overlaid on DICOM slices.
+### 3. Tumor Analysis
+- Visualize organ and tumor masks.
+- Compute and display tumor statistics, including size and count.
 
 ---
 
 ## Example Usage
 
-### 1. Extract and Process Data
-```python
-# Extract data and load DICOM files
-MAIN_DIR = '/path/to/dataset'
-```
-
-### 2. Visualize DICOM Slices
+### Visualizing DICOM Slices
 ```python
 # Visualize liver slices for a specific patient
-dicom_interact(1, "liver")
+dicom_interact(patient_id=1, mask_organ="liver")
 ```
 
-### 3. Segment Tumors with SAM
+### Analyzing Tumor Data
 ```python
-# Segment tumors for a given patient and slice
-dicom_interact_with_sam(1, "liver")
+# Display tumor statistics for all patients
+for i in range(1, num_patient):
+    print(f"Patient 1.{i}: Tumor count = {metadata[i]['tumor_count']}, Tumor size = {metadata[i]['tumor_size']}")
 ```
 
 ---
 
 ## Key Results
-
-- **Tumor Metrics**: Extracted tumor count, size, and scale for each patient.
-- **Interactive Visualization**: Widgets and overlays significantly improve the interpretability of medical images.
+- **Interactive Visualization**: Improved interpretability of complex 3D medical images.
+- **Tumor Insights**: Automated computation of tumor metrics for multi-patient datasets.
+- **Comprehensive Analysis**: Support for multi-organ visualization and analysis. 
 
 ---
 
-## Limitations
+## Technologies Used
+- **DICOM Processing**: `pydicom`, `imageio`
+- **Visualization**: `matplotlib`, `ipywidgets`
+- **Numerical Operations**: `numpy`, `scipy`
 
-- SAM relies on automated mask generation without allowing manual selection of points or fine-tuning. This can lead to inaccuracies in organ boundaries, especially in cases with complex anatomical structures or low-contrast regions.
-- SAM is a general-purpose segmentation model and is not fine-tuned for medical imaging or specific organs, which can result in suboptimal mask generation.
-
-## References
-
-- **SAM**: Segment Anything Model by Meta AI [GitHub](https://github.com/facebookresearch/segment-anything)
-- **Pydicom**: DICOM processing library [Docs](https://pydicom.github.io/)
+This project is a robust tool to explore and analyze medical imaging datasets effectively.
