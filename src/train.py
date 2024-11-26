@@ -96,4 +96,7 @@ def train_model(model, train_loader, criterion, optimizer, device, num_epochs=25
 
         print(f"Epoch {epoch+1}/{num_epochs}, Loss: {epoch_loss:.4f}, Dice Coef: {epoch_dice:.4f}")
 
+        if (epoch + 1) % 10 == 0 and test_dataset is not None:
+            visualize_sample(model, test_dataset, device, sample_idx=sample_idx)
+
     return train_loss_history, train_dice_history
