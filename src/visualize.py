@@ -58,7 +58,7 @@ def visualize_segmentation(model, dataset, device, num_samples=5):
         axes[1].set_title('Ground Truth Mask')
         axes[1].axis('off')
 
-        axes[2].imshow(sample['image'].squeeze(), cmap='gray')
+        # axes[2].imshow(sample['image'].squeeze(), cmap='gray')
         axes[2].imshow(preds_binary, cmap='jet', alpha=0.5)
         axes[2].set_title(f'Predicted Mask\nDice Coef: {dice:.4f}')
         axes[2].axis('off')
